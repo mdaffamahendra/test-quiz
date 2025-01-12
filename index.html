@@ -1,0 +1,1741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Application</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .hidden { display: none; }
+        .correct { color: green; font-weight: bold; }
+        .incorrect { color: red; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container my-5">
+        <h1 class="text-center">Quiz Application</h1>
+
+        <!-- Mata Kuliah Selection -->
+        <div id="course-selection" class="my-4">
+            <label for="course" class="form-label">Pilih Mata Kuliah:</label>
+            <select id="course" class="form-select">
+                <option value="default">-- Pilih Mata Kuliah --</option>
+                <option value="bahasa_indonesia">Bahasa Indonesia</option>
+                <option value="pemrograman">Pemrograman I</option>
+            </select>
+            <button id="start-quiz" class="btn btn-primary mt-3">Mulai Kuis</button>
+        </div>
+
+        <!-- Quiz Form -->
+        <div id="quiz-section" class="hidden">
+            <div id="quiz-container" class="my-4"></div>
+            <button id="submit-quiz" class="btn btn-primary">Submit Quiz</button>
+        </div>
+
+        <!-- Score Section -->
+        <div id="score-section" class="hidden">
+            <h3>Your Score: <span id="score"></span></h3>
+            <div id="review-answers" class="my-4"></div>
+            <button id="retake-quiz" class="btn btn-secondary">Retake Quiz</button>
+        </div>
+    </div>
+
+    <script>
+        // Quiz Data for Different Subjects
+        const quizData = {
+            bahasa_indonesia: [
+            {
+
+question: "Bahasa Indonesia Melayu sebagai sumber (akar) bahasa Indonesia yang kita pergunakan sekarang. Bahasa Melayu sejak dahulu sudah dipakai sebagai bahasa perantara, atau dengan kata lain disebut [PP1/CP-UR 201-1]:",
+
+options: [
+
+  "Diftong",
+
+  "Lingua Franca",
+
+  "Idiom",
+
+  "Bahasa Campuran",
+
+  "Bahasa Serumpun"
+
+],
+
+correctAnswer: 1
+
+},
+
+{
+
+question: "Undang-Undang Dasar 1945, Bab XV, Pasal 36 yang berbunyi [PP1/CP-UR 201-2]:",
+
+options: [
+
+  "Negara Indonesia adalah negara hukum",
+
+  "Kedaulatan berada di tangan rakyat dan dilaksanakan sepenuhnya menurut UUD",
+
+  "Bahasa negara adalah bahasa Indonesia",
+
+  "Bahasa indonesia bukan satu-satunya bahasa negara",
+
+  "Bahasa indonesia merupakan bahasa pemersatu bangsa"
+
+],
+
+correctAnswer: 2
+
+},
+
+{
+
+question: "Pemakaian ragam bahasa yang serasi dengan sasarannya dan mengikuti kaidah bahasa yang benar, merupakan pengertian dari [PP1/CP-UR 201-1]:",
+
+options: [
+
+  "Bahasa Indonesia merupakan bahasa nasional",
+
+  "Ragam baku",
+
+  "Bahasa pemersatu",
+
+  "Berbahasa Indonesia dengan baik dan benar",
+
+  "Bahasa Nasional"
+
+],
+
+correctAnswer: 3
+
+},
+
+{
+
+question: "Fungsi bahasa secara umum adalah sebagai berikut, kecuali [PP1/CP-UR 201-1]:",
+
+options: [
+
+  "Alat komunikasi",
+
+  "Fungsi politik",
+
+  "Wujud kemajuan suatu bangsa",
+
+  "Identitas suatu bangsa",
+
+  "Pemecah belah bangsa"
+
+],
+
+correctAnswer: 4
+
+},
+
+{
+
+question: "Alasan bahasa Melayu menjadi dasar lahirnya bahasa indonesia, adalah [PP1/CP-UR 201-2]:",
+
+options: [
+
+  "Sudah dikenal di banyak wilayah nusantara",
+
+  "Memiliki fonem lebih banyak dibandingkan dengan bahasa lain",
+
+  "Merupakan bahasa para raja",
+
+  "Memiliki sifat bersahaja",
+
+  "Bahasa melayu mudah dimengerti"
+
+],
+
+correctAnswer: 0
+
+},
+
+{
+
+question: "Pernyataan yang menyatakan bahwa pada hakikatnya bahasa ujar atau lisan adalah [PP1/CP-UR 201-1]:",
+
+options: [
+
+  "Orang lebih banyak menggunakan bahasa lisan ketika berkomunikasi dibandingkan dengan bahasa tulis",
+
+  "Ragam bahasa terdiri atas ragam lisan dan ragam tulis",
+
+  "Komunikasi sudah terjadi sejak manusia pertama ada ketika itu belum ada bahasa tulis",
+
+  "Bahasa tulis hanya dapat digunakan oleh orang-orang terpelajar",
+
+  "Semua jawaban benar"
+
+],
+
+correctAnswer: 0
+
+},
+
+{
+
+question: "Menyimak dan membaca merupakan keterampilan berbahasa yang bersifat reseptif. Arti reseptif disini adalah keterampilan yang berupa kegiatan [KK1/CP-UR 201-1]:",
+
+options: [
+
+  "Memahami pesan atau gagasan",
+
+  "Menerapkan sebuah pengetahuan",
+
+  "Menyampaikan pesan atau gagasan",
+
+  "Memberikan masukan",
+
+  "Mengolah pengetahuan atau teknik tertentu"
+
+],
+
+correctAnswer: 0
+
+},
+
+{
+
+question: "Tujuan membaca cepat dengan teknik skimming adalah [PP1/CP-UR 201-2]:",
+
+options: [
+
+  "Memahami isi bacaan secara mendalam",
+
+  "Mencari informasi tertentu dari sebuah bacaan",
+
+  "Menghayati isi bacaan agar dapat menceritakan isinya dengan baik",
+
+  "Mengisi waktu luang",
+
+  "Supaya cepat selesai membacanya"
+
+],
+
+correctAnswer: 1
+
+},
+
+{
+
+question: "Karakteristik karya ilmiah populer adalah [PP1/CP-UR 201-1]:",
+
+options: [
+
+  "Isinya lebih sederhana dibandingkan karya ilmiah murni",
+
+  "Bentuknya lebih kecil dari karya dari karya ilmiah murni",
+
+  "Ilustrasinya lebih banyak sehingga maksudnya menjadi lebih jelas",
+
+  "Bahasanya lebih ringan, mudah dimengerti, dan enak dibaca",
+
+  "Lebih rumit untuk dipahami"
+
+],
+
+correctAnswer: 0
+
+},
+
+{
+
+question: "Salah satu cara untuk mengetahui baik buruknya sebuah tulisan adalah menilai organisasi tulisan yaitu [PP1/CP-UR 201-2]:",
+
+options: [
+
+  "Pilihan kata, penyusunan kalimat, dan penyusunan paragraf",
+
+  "Pendahuluan, isi, dan penutup",
+
+  "Daftar isi, kata pengantar, isi",
+
+  "Daftar isi, isi, dan daftar pustaka",
+
+  "Pendahuluan, kata pengantar, penutup"
+
+],
+
+correctAnswer: 1
+
+},
+
+{
+
+question: "Hal yang pertama dan sangat penting, harus dilakukan oleh seorang pembicara adalah [PP1/CP-UR 201-2]:",
+
+options: [
+
+  "Mencari referensi",
+
+  "Berlatih",
+
+  "Membuat simpulan",
+
+  "Membuat persiapan",
+
+  "Menghafal materi yang ingin disampaikan"
+
+],
+
+correctAnswer: 3
+
+},
+
+{
+
+question: "Isi bagian pembuka sebuah tulisan yang baik adalah [PP1/CP-UR 201-1]:",
+
+options: [
+
+  "Pengalaman hidup si penulis",
+
+  "Paparan pokok-pokok inti tulisan",
+
+  "Pengantar menuju inti persoalan yang hendak disajikannya pada bagian isi",
+
+  "Simpulan, keinginan-keinginan, atau harapan-harapan yang ingin dicapai",
+
+  "Pencapaian kesuksesan penulis"
+
+],
+
+correctAnswer: 2
+
+},
+
+{
+
+question: "Abstrak adalah ringkasan sebuah karya ilmiah yang disusun dengan memenuhi kriteria sebagai berikut, kecuali [PP1/CP-UR 201-2]:",
+
+options: [
+
+  "Disajikan dalam bentuk paparan yang informatif",
+
+  "Bahasa yang digunakan lugas, singkat, padat, dan jelas",
+
+  "Sekurang-kurangnya berisi masalah, tujuan penelitian, metode penelitian, hasil penelitian.",
+
+  "Penulisannya Minimum terdiri dari 250 kata",
+
+  "Memuat riwayat hidup penulis"
+
+],
+
+correctAnswer: 4
+
+},
+
+{
+
+question: "Salah satu contoh konteks fisik dan berpengaruh terhadap kegiatan berbicara nonformal adalah [KK1/CP-UR 201-1]:",
+
+options: [
+
+  "Emosi para pelaku komunikasi",
+
+  "Peserta komunikasi",
+
+  "Karakteristik budaya",
+
+  "Malam hari",
+
+  "Kondisi lingkungan sekitar"
+
+],
+
+correctAnswer: 1
+
+},
+
+{
+
+question: "Bogor dikenal dengan sebutannya sebagai Kota Hujan. Bogor memang berada di ketinggian beberapa ribu kaki di atas permukaan laut. Letaknya yang tinggi ini membuat awan-awan tebal dia atas kota Bogor cepat mencair menjadi hujan. Di samping itu, Bogor juga dikelilingi gunung dan perbukitan dengan hutannya yang masih rimbun. Keadaan alam inilah yang seringkali mampu menahan awan-awan tebal untuk kemudian menghasilkan curahan hujan yang cukup banyak. Teknik pengembangan yang digunakan dalam menyusun paragraf di atas adalah pengembangan [PP1/CP-UR 201-2]:",
+
+options: [
+
+  "Induktif",
+
+  "Deduktif",
+
+  "Klimaks",
+
+  "Antiklimaks",
+
+  "Hiperbola"
+
+],
+
+correctAnswer: 1
+
+},
+
+{
+
+question: "Resensi dapat diartikan sebagai [PP1/CP-UR 201-1]:",
+
+options: [
+
+  "Lukisan/gambar yang digunakan sebagai ilustrasi sebuah buku",
+
+  "Lukisan/gambar yang digunakan sebagai sampul depan sebuah",
+
+  "Tulisan dalam bentuk buku",
+
+  "Tulisan yang berisi ulasan mengenai nilai sebuah buku",
+
+  "Ringkasan dari sebuah buku"
+
+],
+
+correctAnswer: 3
+
+},
+
+{
+
+question: "Pengertian kerangka karangan dalam proses menulis adalah [PP1/CP-UR 201-1]:",
+
+options: [
+
+  "Alat-alat yang akan digunakan di dalam kegiatan menulis",
+
+  "Bahan-bahan yang akan digunakan di dalam kegiatan menulis",
+
+  "Rencana atau rancangan yang berisi topik dan subtopik yang disusun secara sistematis",
+
+  "Rancangan kata yang ingin ditulis",
+
+  "Ide atau gagasan yang akan dikembangkan menjadi sebuah masalah yang akan ditulis"
+
+],
+
+correctAnswer: 2
+
+},
+
+{
+
+question: "Dengan berbicara seseorang dapat menyatakan perasaan dan pikirannya. Pernyataan ini menjelaskan bahwa berbicara merupakan kegiatan [KK1/CP-UR 201-1]:",
+
+options: [
+
+  "Mengekspresikan diri",
+
+  "Yang dilakukan secara lisan",
+
+  "Yang bersifat produktif",
+
+  "Berbahasa yang unik",
+
+  "Berbahasa semaunya"
+
+],
+
+correctAnswer: 0
+
+},
+
+{
+
+question: "Para pahlawan nasional ..... di medan perang tergolong orang-orang yang mati sahid. Kata yang tepat untuk mengisi bagian yang kosong pada kalimat tersebut adalah [KK1/CP-UR 201-2]:",
+
+options: [
+
+  "Mati",
+
+  "Meninggal",
+
+  "Gugur",
+
+  "Wafat",
+
+  "Sekarat"
+
+],
+
+correctAnswer: 2
+
+},
+
+{
+
+question: "Di bawah ini manakah pola penulisan daftar pustaka yang benar [PP1/CP-UR 201-2]:",
+
+options: [
+
+  "M., Hamdi. Dasar-Dasar Komposisi Bahasa Indonesia. Malang: Yayasan Bumi Pertiwi. (1990).",
+
+  "M., Hamdi. dasar-dasar komposisi bahasa indonesia. Malang: Yayasan Bumi Pertiwi. 1990.",
+
+  "Hamdi, M.,. Dasar-Dasar Komposisi Bahasa Indonesia. Malang: Yayasan Bumi Pertiwi. (1990).",
+
+  "Hamdi, M., 1990. Dasar-Dasar Komposisi Bahasa Indonesia. Malang: Yayasan Bumi Pertiwi.",
+
+  "M. Hamdi., (1990). Dasar-Dasar Komposisi Bahasa Indonesia. Malang: Yayasan Bumi Pertiwi."
+
+],
+
+correctAnswer: 3
+
+} ,
+
+{
+
+question: "Cermatilah paragraf berikut ini! Orang pertama yang menulis secara SISTIMITIS tentang bahaya pertumbuhan penduduk adalah Thomas Maltus. AKHLI politik dan pendeta ini berasal dari Inggris. Ia menerbitkan buku ANALISA kependudukan, dan mempertahankan pendapatnya bahwa hukum alamiah akan mempengaruhi pertumbuhan penduduk. Penulisan kata yang benar dari kata yang dicetak huruf besar adalah [KK1/CP-UR 201-2]:",
+
+options: [
+
+  "Sistimatis, akhli, analisa",
+
+  "Sistematis, ahli, analisa",
+
+  "Sistimatis, ahli, analisis",
+
+  "Sistematik, ahli, analitik",
+
+  "Sistematis, ahli, analisis"
+
+],
+
+correctAnswer: 4
+
+},
+
+{
+
+question: "Daging hewan berkaki empat seperti kambing dapat memicu munculnya penyakit hipertensi bagi yang suka mengonsumsi secara berlebihan. Penggemar makanan yang asin atau banyak mengandung garam juga memberi kesempatan penyakit hipertensi mudah timbul. Disamping itu, ada kalanya penyakit hipertensi disebabkan oleh faktor keturunan. Simpulan yang tepat untuk melengkapi paragraf tersebut adalah [KK1/CP-UR 201-1]:",
+
+options: [
+
+  "Penyebab hipertensi dapat dicegah jika kita tahu penyebabnya",
+
+  "Penyebab hipertensi harus dihindari melalui pola makan kita sehari-hari",
+
+  "Penyebab hipertensi adalah pola makan dan faktor keturunan",
+
+  "Makanan berlemak banyak mengandung garam berbahaya",
+
+  "Semua jawaban benar"
+
+],
+
+correctAnswer: 2
+
+},
+
+{
+
+question: "Senang memelihara tanaman hias merupakan modal dasar untuk mencintai lingkungan. Tanaman hias tersebut selain sebagai penghias, juga membuat lingkungan menjadi teduh, asri, dan nyaman. Dengan demikian, memelihara tanaman hias merupakan langkah awal melestarikan lingkungan hidup. Paragraf di atas adalah paragraf [KK1/CP-UR 201-2]:",
+
+options: [
+
+  "Eksposisi",
+
+  "Deskripsi",
+
+  "Narasi",
+
+  "Argumentasi",
+
+  "Eksplanatori"
+
+],
+
+correctAnswer: 3
+
+},
+
+{
+
+question: "Cara penulisan judul karya tulis ilmiah yang benar adalah [PP1/CP-UR 201-1]:",
+
+options: [
+
+  "Pengaruh level protein ransum terhadap pertambahan bobot badan ayam pedaging",
+
+  "Pengaruh level protein ransum terhadap pertambahan bobot badan ayam pedaging",
+
+  "Pengaruh Level Protein Ransum Terhadap Pertambahan Bobot badan ayam Pedaging",
+
+  "“Pengaruh Level Protein Ransum Terhadap Pertambahan Bobot Badan Ayam Pedaging”",
+
+  "Pengaruh Level Protein Ransum terhadap Pertambahan Bobot Badan Ayam Pedaging"
+
+],
+
+correctAnswer: 4
+
+},
+
+{
+
+question: "1. Selain penurunan volume produksi, kualitas buah yang dipanen juga merosot tajam\n2. Serangan hama buah jeruk semakin meluas\n3. Keadaan ini mengakibatkan produksi buah jeruk menyusut minimal 10 persen\n4. Hampir seluruh kecamatan di Kabupaten Timor Tengah Selatan mengalaminya\nSusunan yang tepat agar menjadi paragraf yang padu adalah [KK1/CP-UR 201-1]:",
+
+options: [
+
+  "2-1-3-4",
+
+  "2-4-3-1",
+
+  "3-2-1-4",
+
+  "1-2-3-4",
+
+  "4-3-2-1"
+
+],
+
+correctAnswer: 1
+
+}
+                // Tambahkan soal-soal lainnya di sini
+            ],
+            pemrograman: [
+  {
+    question: "Yang tercetak ke layar jika pernyataan berikut dijalankan:\n\na = 10\nif a > 5:\n  print(\"a lebih besar dari 5\")",
+    options: [
+      "Pernyataan if akan menyebabkan kesalahan",
+      "a lebih besar dari 5",
+      "Tidak ada yang tercetak",
+      "a dan 5 bernilai sama",
+      "a kurang dari 5"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Apa yang akan dicetak oleh pernyataan berikut?\n\nprint(10 > 9)",
+    options: [
+      "9",
+      "10",
+      "True",
+      "False",
+      "Salah"
+    ],
+    correctAnswer: 2
+  },
+  {
+    question: "Apa yang dilakukan pernyataan else dalam perulangan for?",
+    options: [
+      "Menyisipkan elemen ke dalam list",
+      "Menghentikan program Python",
+      "Menghentikan perulangan",
+      "Mencetak pesan kesalahan",
+      "Menjalankan blok kode setelah perulangan selesai"
+    ],
+    correctAnswer: 4
+  },
+  {
+    question: "Apakah hasil dari kode berikut ini jika x = 5?\n\nif x > 3:\n  print(\"Lebih besar dari 3\")\nelse:\n  print(\"Lebih kecil atau sama dengan 3\")",
+    options: [
+      "Lebih besar dari 3",
+      "Error",
+      "Lebih kecil atau sama dengan 3",
+      "None",
+      "Tidak ada output"
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "Cara membuat variabel global di dalam fungsi adalah...",
+    options: [
+      "menggunakan kata kunci set_global",
+      "menggunakan kata kunci global",
+      "menggunakan fungsi global_variable()",
+      "menggunakan kata kunci local",
+      "menggunakan fungsi set_global()"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Fungsi dari pernyataan 'elif' dalam Python?",
+    options: [
+      "Menjalankan blok kode jika kondisi sebelumnya tidak benar",
+      "Menjalankan blok kode tanpa kondisi",
+      "Menjalankan blok kode jika kondisi sebelumnya salah",
+      "Menghentikan program Python",
+      "Menjalankan blok kode jika kondisi sebelumnya benar"
+    ],
+    correctAnswer: 4
+  },
+  {
+    question: "Fungsi utama identation dalam Python adalah...",
+    options: [
+      "Mengubah hasil dari pernyataan if",
+      "Mengatur penamaan variabel",
+      "Menambahkan spasi di antara karakter",
+      "Membuat kode lebih mudah dibaca",
+      "Menghentikan program jika ada kesalahan"
+    ],
+    correctAnswer: 3
+  },
+  {
+    question: "Jika a = \"Hello\" dan b = \"World\", maka hasil dari a + \" \" + b adalah...",
+    options: [
+      "Hello World",
+      "Hello, World",
+      "HelloWorld",
+      "\"Hello World\""
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "Manakah perintah yang benar untuk menghasilkan angka dari 5 hingga 10 (termasuk 5 dan 10) dalam Python menggunakan range?",
+    options: [
+      "range(5, 10+1)",
+      "range(5, 11)",
+      "range(5, 10, 1)",
+      "range(5, 11, 2)",
+      "range(5, 10)"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Operator logika berikut yang menghasilkan True jika kedua operan bernilai True adalah",
+    options: [
+      "!",
+      "==",
+      "and",
+      "not",
+      "or"
+    ],
+    correctAnswer: 2
+  },
+  {
+    question: "Operator logika yang akan bernilai True jika salah satu dari dua pernyataan benar adalah...",
+    options: [
+      "not",
+      "and",
+      "xor",
+      "or",
+      "nor"
+    ],
+    correctAnswer: 3
+  },
+  {
+    question: "Apa yang dimaksud dengan casting dalam Python?",
+    options: [
+      "Menggabungkan dua string menjadi satu",
+      "Mengubah tipe data suatu nilai ke tipe data lain",
+      "Menghapus nilai dari sebuah variabel",
+      "Menduplikasi nilai dalam sebuah list",
+      "Membandingkan dua tipe data"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Fungsi yang digunakan untuk mengubah nilai menjadi integer dalam Python adalah...",
+    options: [
+      "int()",
+      "float()",
+      "str()",
+      "bool()",
+      "list()"
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "Fungsi yang digunakan untuk mengubah nilai menjadi string dalam Python adalah...",
+    options: [
+      "int()",
+      "float()",
+      "str()",
+      "bool()",
+      "list()"
+    ],
+    correctAnswer: 2
+  },
+  {
+    question: "Bagaimana cara mendefinisikan fungsi di Python?",
+    options: [
+      "function myFunction():",
+      "def myFunction():",
+      "fun myFunction():",
+      "define myFunction():",
+      "def: myFunction()"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Metode apa yang digunakan untuk menambahkan elemen ke dalam list?",
+    options: [
+      "list.add()",
+      "list.append()",
+      "list.insert()",
+      "list.extend()",
+      "list.push()"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Apa hasil dari pernyataan berikut?\n\n`len(\"Hello, World!\")`",
+    options: [
+      "10",
+      "11",
+      "12",
+      "13",
+      "14"
+    ],
+    correctAnswer: 3
+  },
+  {
+    question: "Apa ciri utama tuple dibandingkan list?",
+    options: [
+      "Tuple dapat diubah isinya",
+      "Tuple tidak memiliki elemen duplikat",
+      "Tuple bersifat immutable",
+      "Tuple hanya dapat berisi string",
+      "Tuple hanya bisa digunakan dalam loop"
+    ],
+    correctAnswer: 2
+  },
+  {
+    question: "Bagaimana cara mendeklarasikan dictionary kosong di Python?",
+    options: [
+      "dict = ()",
+      "dict = []",
+      "dict = {}",
+      "dict = None",
+      "dict = \"\""
+    ],
+    correctAnswer: 2
+  },
+  {
+    question: "Apa simbol yang digunakan untuk menulis komentar satu baris dalam Python?",
+    options: [
+      "//",
+      "/* */",
+      "#",
+      "--",
+      ";"
+    ],
+    correctAnswer: 2
+  },
+  {
+    question: "Apa simbol yang digunakan untuk menulis komentar banyak baris dalam Python?",
+    options: [
+      '""" """',
+      "/* */",
+      "#",
+      "--",
+      ";"
+    ],
+    correctAnswer: 2
+  },
+  {
+    question: "Metode string mana yang mengubah semua huruf menjadi huruf besar?",
+    options: [
+      "capitalize()",
+      "upper()",
+      "lower()",
+      "title()",
+      "casefold()"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Bagaimana cara menggabungkan dua string 'Python' dan 'Rocks' menjadi satu string?",
+    options: [
+      "Python + Rocks",
+      "'Python'.concat('Rocks')",
+      "'Python' + ' ' + 'Rocks'",
+      "Python + ' ' + Rocks"
+    ],
+    correctAnswer: 2
+  },
+  {
+    question: "Jika `tuple_1 = (1, 2, 3)`, apa hasil dari `tuple_1[1]`?",
+    options: [
+      "1",
+      "2",
+      "3",
+      "Error",
+      "None"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Bagaimana cara mengakses nilai dengan kunci tertentu di dalam dictionary?",
+    options: [
+      "dict.getValue(key)",
+      "dict[key]",
+      "dict.value(key)",
+      "dict.access(key)",
+      "dict.get(key)"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Operator logika yang digunakan untuk mengembalikan True jika kedua pernyataan adalah True...",
+    options: [
+      "not",
+      "or",
+      "xor",
+      "and"
+    ],
+    correctAnswer: 3
+  },
+  {
+    question: "Operator yang digunakan untuk operasi perkalian nilai adalah ...",
+    options: [
+      "+",
+      "/",
+      "%",
+      "*",
+      "-"
+    ],
+    correctAnswer: 3
+  },
+  {
+    question: "Output yang dihasilkan dari kode berikut jika digunakan pada dictionary `my_dict = {\"a\": 1, \"b\": 2, \"c\": 3}`?\n\nfor key in my_dict: print(key)",
+    options: [
+      "a b c",
+      "Error",
+      "1 2 3",
+      "a: 1, b: 2, c: 3",
+      "1 2 3"
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "Perintah percabangan yang akan menjalankan pernyataan paling terakhir jika suatu kondisi tidak terpenuhi....",
+    options: [
+      "Else",
+      "continue",
+      "if",
+      "pass",
+      "elif"
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "Perintah untuk membuat fungsi dalam Python adalah...",
+    options: [
+      "function",
+      "funct",
+      "def",
+      "define",
+      "func"
+    ],
+    correctAnswer: 2
+  },
+  {
+    question: "Perintah untuk memeriksa jika kata atau karakter tertentu TIDAK ada dalam sebuah string...",
+    options: [
+      "exclude()",
+      "absent()",
+      "excluded()",
+      "notin",
+      "missing()"
+    ],
+    correctAnswer: 3
+  },
+  {
+    question: "Perintah untuk mencetak pada Python adalah...",
+    options: [
+      "print()",
+      "show()",
+      "display()",
+      "view()",
+      "output()"
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "Perintah untuk mendapatkan panjang string pada Python adalah...",
+    options: [
+      "len()",
+      "size()",
+      "str_length()",
+      "length()",
+      "count()"
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "Perintah yang benar untuk membuat variabel x dengan nilai 5 adalah...",
+    options: [
+      "x = \"5\"",
+      "\"5\" = x",
+      "x = 5",
+      "value(x) = 5",
+      "5 = x"
+    ],
+    correctAnswer: 2
+  }
+,
+  {
+    question: "Tipe data yang digunakan untuk menyimpan beberapa item dalam satu variabel?",
+    options: [
+      "String",
+      "Boolean",
+      "List",
+      "Integer",
+      "Float"
+    ],
+    correctAnswer: 2
+  },
+  {
+    question: "Tipe data yang digunakan untuk menyimpan kumpulan data yang tidak dapat diubah adalah...",
+    options: [
+      "List",
+      "Array",
+      "Dictionary",
+      "Integer",
+      "Tuple"
+    ],
+    correctAnswer: 4
+  },
+  {
+    question: "Untuk membuat sebuah dictionary dalam Python menggunakan ...",
+    options: [
+      "kutip satu ‘ ‘",
+      "kurung siku [ ]",
+      "kurung bulat ( )",
+      "petik ganda \" \"",
+      "kurung kurawal { }"
+    ],
+    correctAnswer: 4
+  },
+  {
+    question: "Untuk membuat sebuah List dalam Python menggunakan...",
+    options: [
+      "tanda kutip dua \"\"",
+      "tanda kurung siku []",
+      "tanda kurung kurawal {}",
+      "tanda buka kurung ()",
+      "tanda petik tunggal ''"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Jika kode berikut dijalankan: `x = 5\nif x > 10:\n    print(\"x lebih besar dari 10\")\nelse:\n    print(\"x tidak lebih besar dari 10\")`, apa yang akan tercetak di layar?",
+    options: [
+      "x lebih besar dari 10",
+      "x tidak lebih besar dari 10",
+      "x kurang dari 10",
+      "x dan 10 bernilai sama",
+      "Pernyataan if akan menyebabkan kesalahan"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Yang dilakukan pernyataan `range(2, 6)` dalam perulangan for?",
+    options: [
+      "Menghentikan perulangan",
+      "Mengulangi dengan langkah 3",
+      "Menghentikan program Python",
+      "Mengulangi dari 2 hingga 6 (tidak termasuk 6)",
+      "Mengulangi dari 0 hingga 5"
+    ],
+    correctAnswer: 3
+  },
+  {
+    question: "Yang dimaksud dengan kondisi pada percabangan adalah...",
+    options: [
+      "Ekspresi logis untuk menguji kondisi",
+      "Cara menuliskan komentar dalam kode",
+      "Pernyataan untuk menghentikan program",
+      "Fungsi untuk mencetak pesan kesalahan",
+      "Variabel yang digunakan dalam pernyataan if"
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "Yang dimaksud dengan tipe data 'bool' adalah...",
+    options: [
+      "Tipe data untuk menyimpan nilai True atau False",
+      "Tipe data untuk menyimpan nilai kunci-nilai",
+      "Tipe data untuk menyimpan nilai positif saja",
+      "Tipe data untuk menyimpan nilai teks",
+      "Tipe data untuk menyimpan nilai set"
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "Yang dimaksud dengan tipe data 'int' yaitu...",
+    options: [
+      "Tipe data untuk menyimpan bilangan bulat",
+      "Tipe data untuk menyimpan teks",
+      "Tipe data untuk menyimpan nilai positif saja",
+      "Tipe data untuk menyimpan nilai desimal",
+      "Tipe data untuk menyimpan angka kompleks"
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "Apa yang dimaksud dengan pernyataan \"String adalah Array\"...",
+    options: [
+      "array yang hanya berisi karakter khusus",
+      "array yang hanya berisi angka",
+      "array dimensi satu yang berisi karakter Unicode",
+      "array berdimensi dua",
+      "array dimensi tiga untuk gambar"
+    ],
+    correctAnswer: 2
+  },
+{
+
+question: "Apa yang perlu ditentukan dalam perintah UPDATE untuk menentukan data yang akan diubah?",
+
+options: [
+
+  "Nama tabel",
+
+  "Nama kolom",
+
+  "Nama database",
+
+  "Nama host",
+
+  "Nilai primary key"
+
+],
+
+correctAnswer: 4
+
+},
+
+{
+
+question: "Apa fungsi dari metode fetchone() dalam Python?",
+
+options: [
+
+  "Mengambil satu data pertama saja dari hasil query",
+
+  "Mengambil semua data dari hasil query",
+
+  "Menambahkan satu data pertama ke dalam tabel",
+
+  "Menghapus satu data pertama dari tabel",
+
+  "Memperbarui satu data pertama dalam tabel"
+
+],
+
+correctAnswer: 0
+
+},
+
+{
+
+question: "Apa yang dilakukan oleh metode execute() dari objek cursor dalam Python?",
+
+options: [
+
+  "Mengupdate data",
+
+  "Menghapus data",
+
+  "Menampilkan data",
+
+  "Membuat tabel",
+
+  "Menjalankan perintah SQL"
+
+],
+
+correctAnswer: 4
+
+},
+
+{
+
+question: "Apa yang perlu dilakukan sebelum membuat tabel dengan menggunakan modul MySQL Connector?",
+
+options: [
+
+  "Menghapus database",
+
+  "Menghapus modul MySQL Connector",
+
+  "Menginstal ulang modul",
+
+  "Mengetahui informasi hostname, username, password dan database",
+
+  "Menutup koneksi database"
+
+],
+
+correctAnswer: 3
+
+},
+
+{
+
+question: "Tools yang digunakan untuk menjalankan PHPMyAdmin di localhost adalah",
+
+options: [
+
+  "FTP",
+
+  "browser",
+
+  "terminal",
+
+  "SSH",
+
+  "PHP script"
+
+],
+
+correctAnswer: 1
+
+},
+
+{
+
+question: "Bagaimana perintah untuk menghapus data dari tabel MySQL menggunakan Python?",
+
+options: [
+
+  "cursor.delete_data(\"table\", \"condition\")",
+
+  "cursor.remove(\"table\", \"condition\")",
+
+  "cursor.execute(\"DELETE FROM table WHERE condition\")",
+
+  "cursor.delete(\"FROM table WHERE condition\")",
+
+  "db.delete(\"table\", \"condition\")"
+
+],
+
+correctAnswer: 2
+
+},
+
+{
+
+question: "Apa yang harus dilakukan sebelum membuat koneksi ke MySQL dengan Python?",
+
+options: [
+
+  "Membuat tabel",
+
+  "Menginstal modul mysql.connector",
+
+  "Menjalankan server MySQL",
+
+  "Menghapus data",
+
+  "Membuat database"
+
+],
+
+correctAnswer: 1
+
+},
+
+{
+
+question: "Apa yang terjadi jika mencoba menyisipkan string ke kolom numerik?",
+
+options: [
+
+  "ProgrammingError",
+
+  "NotSupportedError",
+
+  "IntegrityError",
+
+  "DataError",
+
+  "OperationalError"
+
+],
+
+correctAnswer: 3
+
+},
+
+{
+
+question: "Tipe data apa yang digunakan untuk menyimpan nilai true/false dalam bentuk yang lebih ringkas dalam MySQL?",
+
+options: [
+
+  "BIT",
+
+  "BOOLEAN",
+
+  "SMALLINT",
+
+  "TINYINT",
+
+  "CHAR"
+
+],
+
+correctAnswer: 1
+
+},
+
+{
+
+question: "Dibawah ini yang harus ditentukan sebelum menjalankan perintah SQL untuk membuat tabel, kecuali...?",
+
+options: [
+
+  "Nama pengguna (user)",
+
+  "Nama kolom",
+
+  "Nama database",
+
+  "Nama host",
+
+  "Password user"
+
+],
+
+correctAnswer: 1
+
+},
+
+{
+
+question: "Bagaimana cara melakukan koneksi ke database MySQL dalam Python?",
+
+options: [
+
+  "db.connection()",
+
+  "connect.mysql()",
+
+  "mysql.connector.connect()",
+
+  "mysql.connect()",
+
+  "db.connect_mysql()"
+
+],
+
+correctAnswer: 2
+
+},
+
+{
+
+question: "Perintah SQL UPDATE customers SET name='Jane', address='Doe' WHERE customer_id=1 digunakan untuk?",
+
+options: [
+
+  "Membuat tabel baru",
+
+  "Menambahkan data ke dalam tabel",
+
+  "Menghapus data dari tabel",
+
+  "Mengambil data dari tabel",
+
+  "Memperbarui data dalam tabel"
+
+],
+
+correctAnswer: 4
+
+},
+
+{
+
+question: "Perintah SQL INSERT INTO customers (name, address) VALUES ('John', 'Doe') digunakan untuk?",
+
+options: [
+
+  "Memperbarui data dalam tabel",
+
+  "Menghapus data dari tabel",
+
+  "Menambahkan data ke dalam tabel",
+
+  "Membuat tabel baru",
+
+  "Mengambil data dari tabel"
+
+],
+
+correctAnswer: 2
+
+},
+
+{
+
+question: "Apa fungsi dari objek cursor dalam koneksi MySQL dengan Python?",
+
+options: [
+
+  "Menjalankan perintah SQL",
+
+  "Menyimpan data hasil query",
+
+  "Menyediakan antarmuka grafis",
+
+  "Menghapus tabel",
+
+  "Menyimpan koneksi database"
+
+],
+
+correctAnswer: 0
+
+},
+
+{
+
+question: "Bagaimana cara mengambil data dari tabel MySQL dengan Python?",
+
+options: [
+
+  "data = db.fetch_all()",
+
+  "data = cursor.select_all()",
+
+  "data = cursor.execute(\"SELECT * FROM table\")",
+
+  "data = cursor.fetch_all()",
+
+  "data = cursor.fetchall()"
+
+],
+
+correctAnswer: 4
+
+},
+
+{
+
+question: "Apa fungsi modul mysql.connector dalam pemrograman Python?",
+
+options: [
+
+  "Memformat output",
+
+  "Menyimpan data",
+
+  "Menghubungkan Python dengan MySQL",
+
+  "Menyediakan fungsi matematika",
+
+  "Membuat GUI"
+
+],
+
+correctAnswer: 2
+
+},
+
+{
+
+question: "Bagaimana cara membuat koneksi ke MySQL dengan Python?",
+
+options: [
+
+  "connection = mysql.connector.connect(host=\"localhost\", user=\"root\", password=\"pass123\", database=\"mydb\")",
+
+  "connection = mysql.connector.connect(user=\"root\", password=\"pass123\", database=\"mydb\")",
+
+  "connection = mysql.connector.open_connection(user=\"root\", password=\"pass123\", database=\"mydb\")",
+
+  "connection = mysql.connector.create_connection(user=\"root\", password=\"pass123\", database=\"mydb\")",
+
+  "connection = mysql.connector.connect(database=\"mydb\")"
+
+],
+
+correctAnswer: 0
+
+},
+
+{
+
+question: "Pesan kesalahan berupa NotSupportedError muncul jika ...?",
+
+options: [
+
+  "Saat koneksi terputus",
+
+  "Saat tidak terjadi kesalahan",
+
+  "Saat perintah SQL tidak valid",
+
+  "Saat operasi SQL valid",
+
+  "Saat operasi tidak didukung oleh driver atau basis data tertentu"
+
+],
+
+correctAnswer: 4
+
+},
+
+{
+
+question: "Cara menampilkan string pada Python adalah",
+
+options: [
+
+  "Menggunakan fungsi \"display()\"",
+
+  "Menggunakan fungsi \"print()\"",
+
+  "Menggunakan fungsi \"show()\"",
+
+  "Menggunakan fungsi \"output()\"",
+
+  "Menggunakan fungsi \"view()\""
+
+],
+
+correctAnswer: 1
+
+},
+
+{
+
+question: "Bagaimana cara menginstal modul mysql.connector pada sistem operasi windows ...",
+
+options: [
+
+  "sudo apt install mysql-connector",
+
+  "install mysql-connector",
+
+  "sudo install mysql-connector",
+
+  "apt-get install mysql-connector",
+
+  "pip install-mysql-connector-python"
+
+],
+
+correctAnswer: 4
+
+},
+
+{
+
+question: "Apa yang dimaksud dengan tipe eksepsi OperationalError?",
+
+options: [
+
+  "Kesalahan cara perintah SQL dikonstruksi",
+
+  "Kesalahan integritas referensial",
+
+  "Kesalahan nilai data",
+
+  "Kesalahan koneksi terputus",
+
+  "Kesalahan operasional"
+
+],
+
+correctAnswer: 4
+
+},
+
+{
+
+question: "Apa penyebab eksepsi terkait dengan kesalahan dalam sintaksis perintah SQL?",
+
+options: [
+
+  "IntegrityError",
+
+  "DataError",
+
+  "OperationalError",
+
+  "NotSupportedError",
+
+  "ProgrammingError"
+
+],
+
+correctAnswer: 4
+
+},
+
+{
+
+question: "Tipe data yang digunakan untuk menyimpan data bilangan bulat (integer) dalam MySQL adalah?",
+
+options: [
+
+  "CHAR",
+
+  "FLOAT",
+
+  "DOUBLE",
+
+  "INT",
+
+  "DECIMAL"
+
+],
+
+correctAnswer: 3
+
+},
+
+{
+
+question: "Bagaimana cara membuat tabel dalam MySQL menggunakan Python?",
+
+options: [
+
+  "cursor.create_table(\"new_table\")",
+
+  "cursor.execute(\"TABLE new_table CREATE;\")",
+
+  "create.table(\"new_table\")",
+
+  "cursor.execute(\"CREATE TABLE new_table;\")",
+
+  "db.create_table(\"new_table\")"
+
+],
+
+correctAnswer: 3
+
+},
+
+{
+
+question: "Bagaimana cara membuat database dengan menggunakan modul MySQL Connector?",
+
+options: [
+
+  "cursor.execute(\"CREATE DATABASE nama_database\")",
+
+  "cursor.create_database(\"nama_database\")",
+
+  "db.execute(\"CREATE DATABASE nama_database\")",
+
+  "db.create(\"nama_database\")",
+
+  "db.create_database(\"nama_database\")"
+
+],
+
+correctAnswer: 0
+
+}
+],
+            sistem_operasi: [
+                {
+                    question: "Proses pengelolaan memori dilakukan oleh:",
+                    options: ["CPU", "Kernel", "Motherboard", "BIOS"],
+                    correctAnswer: 1
+                },
+                // Tambahkan soal-soal lainnya di sini
+            ]
+        };
+
+
+
+        const courseSelection = document.getElementById("course-selection");
+        const quizSection = document.getElementById("quiz-section");
+        const quizContainer = document.getElementById("quiz-container");
+        const scoreSection = document.getElementById("score-section");
+        const reviewAnswers = document.getElementById("review-answers");
+        const courseDropdown = document.getElementById("course");
+        const startQuizBtn = document.getElementById("start-quiz");
+        const submitQuizBtn = document.getElementById("submit-quiz");
+        const scoreDisplay = document.getElementById("score");
+        let currentQuizData = [];
+        let userAnswers = [];
+
+        startQuizBtn.addEventListener("click", () => {
+            const selectedCourse = courseDropdown.value;
+
+            if (selectedCourse === "default") {
+                alert("Silakan pilih mata kuliah terlebih dahulu.");
+                return;
+            }
+
+            // Load quiz data based on selected course
+            currentQuizData = quizData[selectedCourse];
+            renderQuiz();
+
+            // Show quiz section
+            courseSelection.classList.add("hidden");
+            quizSection.classList.remove("hidden");
+        });
+
+        function renderQuiz() {
+            quizContainer.innerHTML = "";
+            currentQuizData.forEach((quiz, index) => {
+                const quizHTML = `
+                    <div class="mb-3">
+                        <p><strong>${index + 1}. ${quiz.question}</strong></p>
+                        ${quiz.options.map((option, i) => `
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="quiz${index}" id="quiz${index}option${i}" value="${i}">
+                                <label class="form-check-label" for="quiz${index}option${i}">
+                                    ${option}
+                                </label>
+                            </div>
+                        `).join("")}
+                    </div>
+                `;
+                quizContainer.innerHTML += quizHTML;
+            });
+        }
+
+        submitQuizBtn.addEventListener("click", () => {
+            let score = 0;
+            userAnswers = [];
+            currentQuizData.forEach((quiz, index) => {
+                const selectedOption = document.querySelector(`input[name="quiz${index}"]:checked`);
+                const selectedAnswer = selectedOption ? parseInt(selectedOption.value) : null;
+
+                userAnswers.push(selectedAnswer);
+
+                if (selectedAnswer === quiz.correctAnswer) {
+                    score++;
+                }
+            });
+
+            // Display Score
+            quizSection.classList.add("hidden");
+            scoreSection.classList.remove("hidden");
+            scoreDisplay.textContent = `${score} / ${currentQuizData.length}`;
+            renderReviewAnswers();
+        });
+
+        function renderReviewAnswers() {
+            reviewAnswers.innerHTML = currentQuizData.map((quiz, index) => {
+                const userAnswer = userAnswers[index];
+                const correctAnswer = quiz.correctAnswer;
+
+                return `
+                    <div class="mb-3">
+                        <p><strong>${index + 1}. ${quiz.question}</strong></p>
+                        <p>
+                            Jawaban Anda: 
+                            <span class="${userAnswer === correctAnswer ? 'correct' : 'incorrect'}">
+                                ${userAnswer !== null ? quiz.options[userAnswer] : "Tidak Dijawab"}
+                            </span>
+                        </p>
+                        <p>Jawaban Benar: <span class="correct">${quiz.options[correctAnswer]}</span></p>
+                    </div>
+                `;
+            }).join("");
+        }
+
+        document.getElementById("retake-quiz").addEventListener("click", () => {
+            // Reset everything
+            scoreSection.classList.add("hidden");
+            courseSelection.classList.remove("hidden");
+            courseDropdown.value = "default";
+        });
+    </script>
+</body>
+</html>
