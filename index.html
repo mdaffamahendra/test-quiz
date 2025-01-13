@@ -22,6 +22,7 @@
                 <option value="default">-- Pilih Mata Kuliah --</option>
                 <option value="bahasa_indonesia">Bahasa Indonesia</option>
                 <option value="pemrograman">Pemrograman I</option>
+                <option value="struktur_data">Struktur Data</option>
             </select>
             <button id="start-quiz" class="btn btn-primary mt-3">Mulai Kuis</button>
         </div>
@@ -1628,14 +1629,1198 @@ correctAnswer: 0
 
 }
 ],
-            sistem_operasi: [
-                {
-                    question: "Proses pengelolaan memori dilakukan oleh:",
-                    options: ["CPU", "Kernel", "Motherboard", "BIOS"],
-                    correctAnswer: 1
-                },
-                // Tambahkan soal-soal lainnya di sini
-            ]
+            struktur_data: [
+  {
+    question: "Apa prinsip utama dalam Queue?",
+    options: [
+      "LIFO",
+      "FIFO",
+      "Random",
+      "Bubble"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Operasi apa yang digunakan untuk menambahkan elemen ke dalam Queue?",
+    options: [
+      "Push",
+      "Enqueue",
+      "Dequeue",
+      "Pop"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Operasi yang digunakan untuk menghapus elemen dari Queue adalah...",
+    options: [
+      "Enqueue",
+      "IsEmpty",
+      "Dequeue",
+      "Clear"
+    ],
+    correctAnswer: 2
+  },
+  {
+    question: "Queue yang hanya dapat ditambahkan dan dihapus elemen pada satu sisi disebut...",
+    options: [
+      "Circular Queue",
+      "Deque",
+      "Single-ended Queue",
+      "Priority Queue"
+    ],
+    correctAnswer: 2
+  },
+  {
+    question: "Pada Circular Queue, jika posisi tail sudah di ujung array, elemen berikutnya akan dimasukkan ke...",
+    options: [
+      "Posisi head",
+      "Indeks berikutnya setelah tail",
+      "Indeks awal array",
+      "Tidak dapat dimasukkan"
+    ],
+    correctAnswer: 2
+  },
+  {
+    question: "Fungsi 'IsEmpty' pada Queue digunakan untuk...",
+    options: [
+      "Memeriksa apakah Queue kosong",
+      "Menambahkan elemen ke Queue",
+      "Menghapus elemen dari Queue",
+      "Membersihkan seluruh Queue"
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "Apa yang terjadi jika Queue penuh dan dilakukan operasi Enqueue?",
+    options: [
+      "Elemen ditambahkan secara otomatis",
+      "Elemen dihapus untuk memberi ruang",
+      "Terjadi overflow",
+      "Queue di-reset"
+    ],
+    correctAnswer: 2
+  },
+  {
+    question: "Operasi Clear pada Queue digunakan untuk...",
+    options: [
+      "Menghapus semua elemen dalam Queue",
+      "Memeriksa elemen pertama dalam Queue",
+      "Menambahkan elemen ke Queue",
+      "Mengembalikan elemen terakhir dalam Queue"
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "Queue yang memungkinkan operasi pada kedua ujungnya disebut...",
+    options: [
+      "Circular Queue",
+      "Deque",
+      "Priority Queue",
+      "Static Queue"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Manakah contoh Queue dalam kehidupan nyata?",
+    options: [
+      "Tumpukan piring",
+      "Antrian di kasir",
+      "Buku di rak",
+      "Proses sorting data"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Jika Queue berisi [10, 20, 30], dan Enqueue(40) dilakukan, bagaimana keadaan Queue?",
+    options: [
+      "[10, 20, 30]",
+      "[10, 20, 30, 40]",
+      "[40, 30, 20, 10]",
+      "[10, 40, 30, 20]"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Jika Queue berisi [10, 20, 30], dan Dequeue() dilakukan, bagaimana keadaan Queue?",
+    options: [
+      "[10, 20, 30]",
+      "[30, 20]",
+      "[20, 30]",
+      "[30]"
+    ],
+    correctAnswer: 2
+  },
+  {
+    question: "Jenis Queue yang memperhatikan prioritas elemen disebut...",
+    options: [
+      "Circular Queue",
+      "Priority Queue",
+      "Deque",
+      "Static Queue"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Apa yang dimaksud dengan Dynamic Queue?",
+    options: [
+      "Queue dengan ukuran tetap",
+      "Queue yang ukurannya dapat berubah",
+      "Queue yang elemen-elemennya diurutkan",
+      "Queue yang hanya berisi satu elemen"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Circular Queue lebih efisien dibanding Queue biasa karena...",
+    options: [
+      "Memiliki lebih banyak elemen",
+      "Memungkinkan elemen ditambahkan di mana saja",
+      "Memanfaatkan ruang kosong di awal array",
+      "Menghapus elemen secara otomatis"
+    ],
+    correctAnswer: 2
+  },
+  {
+    question: "Kompleksitas waktu untuk operasi Enqueue pada Queue adalah...",
+    options: [
+      "O(1)",
+      "O(n)",
+      "O(log n)",
+      "O(n^2)"
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "Operasi Dequeue menghapus elemen dari...",
+    options: [
+      "Bagian depan Queue",
+      "Bagian belakang Queue",
+      "Posisi acak dalam Queue",
+      "Semua elemen dalam Queue"
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "Double-ended Queue (Deque) memungkinkan operasi di...",
+    options: [
+      "Satu ujung saja",
+      "Kedua ujung",
+      "Posisi tengah Queue",
+      "Hanya ujung awal"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Jenis Queue yang elemen-elemennya memiliki urutan prioritas disebut...",
+    options: [
+      "Linear Queue",
+      "Priority Queue",
+      "Circular Queue",
+      "Dynamic Queue"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Queue disebut overflow jika...",
+    options: [
+      "Semua elemen telah dihapus",
+      "Tidak ada elemen di Queue",
+      "Tidak ada ruang untuk elemen baru",
+      "Elemen ditambahkan secara dinamis"
+    ],
+    correctAnswer: 2
+  },
+  {
+    question: "Dalam Queue berbasis array, elemen pertama diakses menggunakan...",
+    options: [
+      "Head",
+      "Tail",
+      "Indeks terakhir",
+      "Prioritas"
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "Pada Circular Queue, operasi Dequeue dilakukan di...",
+    options: [
+      "Posisi tail",
+      "Posisi head",
+      "Posisi tengah",
+      "Posisi terakhir"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Manakah yang bukan karakteristik dari Queue?",
+    options: [
+      "FIFO",
+      "Dinamis",
+      "Elemen dihapus dari belakang",
+      "Digunakan untuk penjadwalan proses"
+    ],
+    correctAnswer: 2
+  },
+  {
+    question: "Queue paling sering digunakan dalam situasi berikut, kecuali...",
+    options: [
+      "Buffer data",
+      "Algoritma DFS",
+      "Penjadwalan proses",
+      "Pemrosesan permintaan jaringan"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Apa yang dimaksud dengan Static Queue?",
+    options: [
+      "Queue dengan ukuran tetap",
+      "Queue yang ukurannya dapat berubah",
+      "Queue yang hanya menyimpan elemen integer",
+      "Queue dengan elemen acak"
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "Apa prinsip utama dalam Stack?",
+    options: [
+      "FIFO",
+      "LIFO",
+      "Random",
+      "Sorting"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Operasi apa yang digunakan untuk menambahkan elemen ke dalam Stack?",
+    options: [
+      "Enqueue",
+      "Push",
+      "Dequeue",
+      "Pop"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Operasi untuk menghapus elemen dari Stack adalah...",
+    options: [
+      "Enqueue",
+      "Push",
+      "Dequeue",
+      "Pop"
+    ],
+    correctAnswer: 3
+  },
+  {
+    question: "Elemen terakhir yang ditambahkan ke Stack akan...",
+    options: [
+      "Tetap di posisi bawah",
+      "Dihapus pertama kali",
+      "Berada di posisi tengah",
+      "Tidak dapat diakses"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Fungsi 'IsEmpty' pada Stack digunakan untuk...",
+    options: [
+      "Menambah elemen ke Stack",
+      "Menghapus elemen dari Stack",
+      "Memeriksa apakah Stack kosong",
+      "Membersihkan seluruh Stack"
+    ],
+    correctAnswer: 2
+  },
+  {
+    question: "Apa yang terjadi jika Stack penuh dan dilakukan operasi Push?",
+    options: [
+      "Terjadi overflow",
+      "Elemen ditambahkan ke bagian bawah",
+      "Elemen terhapus otomatis",
+      "Stack diatur ulang"
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "Fungsi 'IsFull' pada Stack digunakan untuk...",
+    options: [
+      "Memeriksa apakah Stack kosong",
+      "Memeriksa apakah Stack penuh",
+      "Menghapus elemen dari Stack",
+      "Menampilkan elemen terakhir"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Apa yang dimaksud dengan operasi 'Clear' pada Stack?",
+    options: [
+      "Menambah elemen baru",
+      "Menghapus semua elemen di Stack",
+      "Memeriksa elemen terakhir",
+      "Mengatur ulang indeks Stack"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Manakah contoh Stack dalam kehidupan nyata?",
+    options: [
+      "Antrian di kasir",
+      "Piring bertumpuk di dapur",
+      "Penjadwalan proses",
+      "Data yang diurutkan"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Operasi 'Peek' pada Stack digunakan untuk...",
+    options: [
+      "Menghapus elemen terakhir",
+      "Menampilkan elemen teratas tanpa menghapusnya",
+      "Menambah elemen ke Stack",
+      "Mengatur ulang Stack"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Jika Stack berisi [10, 20, 30], dan Push(40) dilakukan, bagaimana keadaan Stack?",
+    options: [
+      "[10, 20, 30]",
+      "[40, 10, 20, 30]",
+      "[10, 20, 30, 40]",
+      "[30, 40, 10, 20]"
+    ],
+    correctAnswer: 2
+  },
+  {
+    question: "Jika Stack berisi [10, 20, 30], dan Pop() dilakukan, bagaimana keadaan Stack?",
+    options: [
+      "[10, 20, 30]",
+      "[10, 20]",
+      "[30, 10]",
+      "[20, 30]"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Stack paling sering digunakan dalam algoritma...",
+    options: [
+      "BFS",
+      "DFS",
+      "Sorting",
+      "Searching"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Manakah yang merupakan karakteristik Stack?",
+    options: [
+      "FIFO",
+      "Elemen dihapus dari tengah",
+      "LIFO",
+      "Elemen pertama yang ditambahkan akan dihapus terakhir"
+    ],
+    correctAnswer: 2
+  },
+  {
+    question: "Apa yang dimaksud dengan Stack Overflow?",
+    options: [
+      "Ketika elemen Stack habis",
+      "Ketika elemen baru tidak dapat ditambahkan karena Stack penuh",
+      "Ketika Stack diatur ulang secara otomatis",
+      "Ketika elemen Stack tidak beraturan"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Apa yang terjadi jika dilakukan operasi Pop pada Stack kosong?",
+    options: [
+      "Terjadi underflow",
+      "Elemen diatur ulang",
+      "Elemen terhapus otomatis",
+      "Stack tetap kosong tanpa error"
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "Fungsi utama dari Stack dalam pemrograman adalah...",
+    options: [
+      "Menyimpan data secara acak",
+      "Mengatur data berdasarkan prioritas",
+      "Menyimpan data secara berurutan dengan prinsip LIFO",
+      "Mengurutkan data dalam array"
+    ],
+    correctAnswer: 2
+  },
+  {
+    question: "Apa perbedaan antara Stack dan Queue?",
+    options: [
+      "Stack menggunakan FIFO, Queue menggunakan LIFO",
+      "Stack menggunakan LIFO, Queue menggunakan FIFO",
+      "Stack lebih efisien dibanding Queue",
+      "Queue hanya bisa menyimpan angka, Stack bisa menyimpan string"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Elemen pertama yang dimasukkan ke Stack akan...",
+    options: [
+      "Berada di posisi bawah dan dihapus terakhir",
+      "Berada di posisi bawah dan dihapus pertama",
+      "Berada di posisi atas dan dihapus terakhir",
+      "Berada di posisi atas dan dihapus pertama"
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "Kompleksitas waktu untuk operasi Push dan Pop pada Stack adalah...",
+    options: [
+      "O(n)",
+      "O(log n)",
+      "O(1)",
+      "O(n^2)"
+    ],
+    correctAnswer: 2
+  },
+  {
+    question: "Manakah yang bukan merupakan aplikasi dari Stack?",
+    options: [
+      "Backtracking",
+      "Pemrosesan ekspresi matematika",
+      "Pemrosesan file secara paralel",
+      "Fungsi rekursi"
+    ],
+    correctAnswer: 2
+  },
+  {
+    question: "Dalam Stack berbasis array, elemen terakhir diakses menggunakan...",
+    options: [
+      "Indeks pertama",
+      "Indeks terakhir",
+      "Indeks acak",
+      "Tidak dapat diakses"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Apa kelebihan menggunakan Stack dalam algoritma rekursi?",
+    options: [
+      "Mempermudah pengaturan memori",
+      "Tidak memerlukan elemen tambahan",
+      "Membantu melacak state sebelumnya",
+      "Mengurangi waktu eksekusi"
+    ],
+    correctAnswer: 2
+  },
+  {
+    question: "Manakah struktur data yang paling cocok untuk implementasi fungsi undo-redo?",
+    options: [
+      "Queue",
+      "Linked List",
+      "Stack",
+      "Tree"
+    ],
+    correctAnswer: 2
+  },
+  {
+    question: "Jika Stack berisi [A, B, C], elemen mana yang akan dihapus pertama kali?",
+    options: [
+      "A",
+      "B",
+      "C",
+      "Tidak ada elemen yang dihapus"
+    ],
+    correctAnswer: 2
+  },
+  {
+    question: "Apa itu Linked List?",
+    options: [
+      "Struktur data linier dengan elemen-elemen yang saling terhubung",
+      "Struktur data dengan elemen acak",
+      "Struktur data yang hanya mendukung operasi sorting",
+      "Array dua dimensi"
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "Apa yang digunakan untuk menghubungkan elemen-elemen pada Linked List?",
+    options: [
+      "Indeks",
+      "Pointer",
+      "Array",
+      "Hash"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Manakah jenis Linked List yang setiap node-nya memiliki pointer ke node berikutnya?",
+    options: [
+      "Circular Linked List",
+      "Doubly Linked List",
+      "Single Linked List",
+      "Hash Table"
+    ],
+    correctAnswer: 2
+  },
+  {
+    question: "Apa kelebihan utama Linked List dibandingkan Array?",
+    options: [
+      "Akses elemen lebih cepat",
+      "Ukurannya dinamis",
+      "Mendukung akses langsung ke elemen",
+      "Memerlukan lebih sedikit memori"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Operasi apa yang digunakan untuk menambahkan elemen di awal Linked List?",
+    options: [
+      "Append",
+      "Insert at Beginning",
+      "Delete at Beginning",
+      "Remove"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Apa itu Node dalam Linked List?",
+    options: [
+      "Unit memori untuk menyimpan data dan pointer",
+      "Alamat dari elemen terakhir",
+      "Elemen independen tanpa keterhubungan",
+      "Pointer ke Linked List lainnya"
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "Manakah jenis Linked List yang memungkinkan traversal dua arah?",
+    options: [
+      "Circular Linked List",
+      "Doubly Linked List",
+      "Single Linked List",
+      "Stack"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Apa ciri utama Circular Linked List?",
+    options: [
+      "Elemen terakhir menunjuk ke elemen pertama",
+      "Elemen terakhir tidak memiliki pointer",
+      "Elemen pertama menunjuk ke elemen terakhir",
+      "Tidak mendukung traversal"
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "Operasi yang digunakan untuk menghapus elemen di akhir Linked List disebut...",
+    options: [
+      "Remove Last",
+      "Delete at End",
+      "Remove First",
+      "Insert Last"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Jika sebuah Linked List kosong, nilai dari head adalah...",
+    options: [
+      "0",
+      "NULL",
+      "-1",
+      "Tidak terdefinisi"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Kompleksitas waktu untuk menambahkan elemen di awal Linked List adalah...",
+    options: [
+      "O(1)",
+      "O(n)",
+      "O(log n)",
+      "O(n^2)"
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "Manakah yang bukan merupakan jenis Linked List?",
+    options: [
+      "Single Linked List",
+      "Doubly Linked List",
+      "Circular Linked List",
+      "Static Linked List"
+    ],
+    correctAnswer: 3
+  },
+  {
+    question: "Apa kelemahan utama dari Single Linked List?",
+    options: [
+      "Traversal hanya bisa dilakukan satu arah",
+      "Menggunakan terlalu banyak memori",
+      "Tidak mendukung penambahan elemen",
+      "Tidak dapat diimplementasikan secara dinamis"
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "Apa yang dimaksud dengan 'head' pada Linked List?",
+    options: [
+      "Elemen terakhir dalam Linked List",
+      "Pointer ke elemen pertama Linked List",
+      "Elemen tengah dalam Linked List",
+      "Pointer ke elemen terakhir Linked List"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Operasi untuk menambahkan elemen di akhir Linked List disebut...",
+    options: [
+      "Append",
+      "Push",
+      "Insert First",
+      "Pop"
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "Bagaimana Circular Linked List berbeda dari Linked List biasa?",
+    options: [
+      "Elemen pertama menunjuk ke elemen terakhir",
+      "Elemen terakhir menunjuk ke elemen pertama",
+      "Tidak ada elemen kosong",
+      "Elemen dapat dihapus secara acak"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Apa fungsi dari pointer 'next' dalam sebuah Node?",
+    options: [
+      "Menunjuk ke elemen sebelumnya",
+      "Menunjuk ke elemen berikutnya",
+      "Menunjuk ke elemen pertama",
+      "Menunjuk ke elemen terakhir"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Manakah yang merupakan aplikasi Linked List?",
+    options: [
+      "Antrian printer",
+      "Array 2D",
+      "Pengolahan matriks",
+      "Sorting elemen"
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "Kompleksitas waktu untuk mencari elemen dalam Linked List adalah...",
+    options: [
+      "O(1)",
+      "O(n)",
+      "O(log n)",
+      "O(n^2)"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Apa perbedaan utama antara Doubly Linked List dan Single Linked List?",
+    options: [
+      "Doubly Linked List memiliki dua pointer, sedangkan Single Linked List hanya memiliki satu pointer",
+      "Single Linked List menggunakan lebih banyak memori",
+      "Doubly Linked List tidak dapat diimplementasikan secara dinamis",
+      "Single Linked List memungkinkan traversal dua arah"
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "Manakah yang bukan aplikasi dari Linked List?",
+    options: [
+      "Implementasi Stack",
+      "Implementasi Queue",
+      "Penyimpanan data statis",
+      "Penjadwalan proses"
+    ],
+    correctAnswer: 2
+  },
+  {
+    question: "Apa kelemahan utama Doubly Linked List?",
+    options: [
+      "Menggunakan lebih banyak memori karena memiliki dua pointer",
+      "Tidak mendukung traversal dua arah",
+      "Tidak dapat menambahkan elemen di tengah",
+      "Kompleksitas waktu lebih tinggi untuk operasi dasar"
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "Apa yang terjadi jika kita mencoba mengakses elemen di Linked List yang kosong?",
+    options: [
+      "Operasi berhasil dengan elemen NULL",
+      "Terjadi error atau exception",
+      "Elemen default dikembalikan",
+      "Elemen terakhir dikembalikan"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Jenis Linked List mana yang paling cocok untuk implementasi undo-redo?",
+    options: [
+      "Single Linked List",
+      "Doubly Linked List",
+      "Circular Linked List",
+      "Static Linked List"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Dalam Linked List, elemen terakhir dapat diidentifikasi dengan pointer...",
+    options: [
+      "NULL",
+      "head",
+      "tail",
+      "prev"
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "Apa itu Sequential Search?",
+    options: [
+      "Pencarian elemen secara langsung dengan indeks",
+      "Pencarian elemen dengan membandingkan satu per satu",
+      "Pencarian elemen menggunakan pohon biner",
+      "Pencarian elemen dengan membagi dua array"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Apa syarat utama Binary Search dapat digunakan?",
+    options: [
+      "Data harus berupa bilangan bulat",
+      "Data harus terurut",
+      "Data harus berupa string",
+      "Data tidak boleh mengandung duplikasi"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Kompleksitas waktu terbaik untuk Binary Search adalah...",
+    options: [
+      "O(n)",
+      "O(1)",
+      "O(log n)",
+      "O(n^2)"
+    ],
+    correctAnswer: 2
+  },
+  {
+    question: "Apa kelemahan utama Sequential Search?",
+    options: [
+      "Hanya bisa digunakan pada array terurut",
+      "Kompleksitas waktu tinggi untuk data besar",
+      "Tidak mendukung pencarian elemen pertama",
+      "Hanya berfungsi pada struktur data dinamis"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Apa itu Graph dalam struktur data?",
+    options: [
+      "Struktur data linier dengan elemen yang saling terhubung",
+      "Struktur data non-linier yang terdiri dari node dan edge",
+      "Struktur data berbasis array dua dimensi",
+      "Struktur data untuk pencarian elemen secara hierarki"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Apa yang dimaksud dengan Directed Graph?",
+    options: [
+      "Graph tanpa arah pada edge-nya",
+      "Graph dengan arah pada setiap edge",
+      "Graph dengan node yang saling berhubungan langsung",
+      "Graph dengan jumlah node lebih banyak daripada edge"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Apa yang dimaksud dengan Weighted Graph?",
+    options: [
+      "Graph dengan jumlah node lebih banyak daripada edge",
+      "Graph di mana setiap edge memiliki bobot atau nilai",
+      "Graph dengan arah pada semua edge",
+      "Graph dengan node yang saling berhubungan"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Traversal pada Graph dapat dilakukan menggunakan...",
+    options: [
+      "Breadth-First Search (BFS)",
+      "Depth-First Search (DFS)",
+      "Keduanya benar",
+      "Sorting elemen"
+    ],
+    correctAnswer: 2
+  },
+  {
+    question: "Kompleksitas waktu untuk traversal BFS pada Graph adalah...",
+    options: [
+      "O(V + E)",
+      "O(V^2)",
+      "O(V + log E)",
+      "O(E^2)"
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "Apa kelemahan utama adjacency matrix?",
+    options: [
+      "Membutuhkan ruang memori yang besar untuk graph jarang (sparse graph)",
+      "Tidak mendukung representasi graph terhubung",
+      "Kompleksitas traversal meningkat",
+      "Hanya cocok untuk graph berbobot"
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "Apa itu Minimum Spanning Tree (MST)?",
+    options: [
+      "Pohon yang mencakup semua node dengan total bobot edge minimum",
+      "Pohon dengan semua node memiliki dua child",
+      "Graph dengan semua edge memiliki arah",
+      "Pohon dengan node yang memiliki nilai unik"
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "Apa itu Hashing?",
+    options: [
+      "Metode untuk menyimpan dan mengambil data menggunakan indeks unik",
+      "Metode pencarian elemen secara linier",
+      "Representasi data dalam bentuk matriks",
+      "Penyimpanan data dalam urutan tertentu"
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "Apa fungsi utama dari hash function?",
+    options: [
+      "Mengelompokkan data ke dalam bucket",
+      "Mengurutkan data",
+      "Menyimpan data secara linier",
+      "Menghapus duplikasi data"
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "Apa yang dimaksud dengan collision pada hashing?",
+    options: [
+      "Dua elemen memiliki nilai hash yang sama",
+      "Elemen tidak dapat dimasukkan ke dalam hash table",
+      "Elemen dihapus dari hash table",
+      "Hash table tidak dapat diakses"
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "Metode yang digunakan untuk menangani collision pada hashing adalah...",
+    options: [
+      "Chaining",
+      "Open Addressing",
+      "Keduanya benar",
+      "Tidak ada metode"
+    ],
+    correctAnswer: 2
+  },
+  {
+    question: "Apa itu hash table?",
+    options: [
+      "Array yang digunakan untuk menyimpan data berdasarkan nilai hash",
+      "Struktur data berbasis pohon",
+      "Daftar elemen yang saling terhubung",
+      "Struktur data untuk pencarian linier"
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "Kompleksitas waktu terbaik untuk operasi pencarian menggunakan hashing adalah...",
+    options: [
+      "O(n)",
+      "O(log n)",
+      "O(1)",
+      "O(n^2)"
+    ],
+    correctAnswer: 2
+  },
+  {
+    question: "Apa kelemahan utama dari hashing?",
+    options: [
+      "Tidak mendukung pencarian data",
+      "Masalah collision",
+      "Kompleksitas waktu tinggi",
+      "Tidak dapat menyimpan data besar"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "Apa yang dimaksud dengan chaining dalam hashing?",
+    options: [
+      "Menyimpan elemen dengan nilai hash sama dalam struktur data seperti linked list",
+      "Menyimpan elemen dalam bucket acak",
+      "Menyimpan elemen secara linier di hash table",
+      "Menyimpan elemen dengan nilai hash sama di tempat berbeda"
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "Apa itu load factor dalam hash table?",
+    options: [
+      "Rasio antara jumlah elemen dalam hash table dengan ukuran tabel",
+      "Waktu yang diperlukan untuk melakukan hashing",
+      "Jumlah collision dalam hash table",
+      "Kapasitas maksimum dari hash table"
+    ],
+    correctAnswer: 0
+  },
+  {
+    "question": "Apa yang dimaksud dengan Tree dalam struktur data?",
+    "options": [
+      "Kumpulan node yang saling terhubung dengan satu hubungan hierarki",
+      "Array satu dimensi",
+      "Struktur data berbasis indeks",
+      "Struktur data linier seperti Linked List"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "question": "Node pertama dalam sebuah Tree disebut...",
+    "options": [
+      "Leaf",
+      "Root",
+      "Parent",
+      "Sibling"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Node yang tidak memiliki child disebut...",
+    "options": [
+      "Parent node",
+      "Root node",
+      "Internal node",
+      "Leaf node"
+    ],
+    "correctAnswer": 3
+  },
+  {
+    "question": "Apa yang dimaksud dengan parent node?",
+    "options": [
+      "Node yang memiliki satu atau lebih child",
+      "Node tanpa child",
+      "Node terakhir dalam Tree",
+      "Node dengan nilai tertinggi"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "question": "Node pada level yang sama dalam Tree disebut...",
+    "options": [
+      "Parent",
+      "Leaf",
+      "Sibling",
+      "Root"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Apa itu Binary Tree?",
+    "options": [
+      "Pohon dengan maksimal dua child per node",
+      "Pohon dengan child tak terbatas per node",
+      "Pohon dengan node yang hanya memiliki satu child",
+      "Pohon tanpa struktur hierarki"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "question": "Traversal preorder pada Tree dilakukan dengan urutan...",
+    "options": [
+      "Left → Root → Right",
+      "Root → Left → Right",
+      "Left → Right → Root",
+      "Right → Root → Left"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Traversal inorder pada Tree dilakukan dengan urutan...",
+    "options": [
+      "Root → Left → Right",
+      "Left → Right → Root",
+      "Left → Root → Right",
+      "Right → Root → Left"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Traversal postorder pada Tree dilakukan dengan urutan...",
+    "options": [
+      "Root → Left → Right",
+      "Left → Root → Right",
+      "Left → Right → Root",
+      "Right → Root → Left"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Node pada Binary Search Tree (BST) di sebelah kiri root memiliki nilai...",
+    "options": [
+      "Lebih besar dari root",
+      "Sama dengan root",
+      "Lebih kecil dari root",
+      "Tidak ada aturan khusus"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Apa itu Full Binary Tree?",
+    "options": [
+      "Semua node memiliki dua child atau tidak memiliki child sama sekali",
+      "Semua level Tree diisi penuh kecuali level terakhir",
+      "Setiap node hanya memiliki satu child",
+      "Semua node berada pada level yang sama"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "question": "Apa yang dimaksud dengan Complete Binary Tree?",
+    "options": [
+      "Semua level Tree terisi penuh kecuali level terakhir yang diisi dari kiri ke kanan",
+      "Semua node memiliki dua child",
+      "Semua node berada pada level yang sama",
+      "Setiap node hanya memiliki satu child"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "question": "Apa kelebihan dari Binary Search Tree (BST)?",
+    "options": [
+      "Memungkinkan pencarian elemen dalam waktu O(1)",
+      "Elemen diurutkan secara otomatis",
+      "Tidak membutuhkan memori tambahan untuk pointer",
+      "Struktur data linier"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Node dalam Tree yang tidak memiliki parent disebut...",
+    "options": [
+      "Leaf",
+      "Root",
+      "Sibling",
+      "Child"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Traversal level order pada Tree dilakukan dengan urutan...",
+    "options": [
+      "Root → Left → Right",
+      "Root → Level 1 → Level 2 → ...",
+      "Left → Root → Right",
+      "Left → Right → Root"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Apa fungsi utama dari Tree dalam struktur data?",
+    "options": [
+      "Mengurutkan data secara efisien",
+      "Menyimpan data dengan hubungan hierarki",
+      "Mengakses elemen berdasarkan indeks",
+      "Menyimpan data dalam bentuk linier"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Jenis Tree yang elemen-elemen di dalamnya tidak saling berhubungan disebut...",
+    "options": [
+      "Binary Tree",
+      "Forest",
+      "Complete Tree",
+      "Full Tree"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Berapa banyak child maksimal yang dapat dimiliki sebuah node dalam Binary Tree?",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "Tak terbatas"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Dalam Binary Search Tree, elemen terbesar akan ditemukan di...",
+    "options": [
+      "Root",
+      "Subtree kanan",
+      "Subtree kiri",
+      "Level paling bawah"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Apa kompleksitas waktu terbaik untuk pencarian elemen di Binary Search Tree?",
+    "options": [
+      "O(1)",
+      "O(log n)",
+      "O(n)",
+      "O(n^2)"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Apa itu Height dalam Tree?",
+    "options": [
+      "Jumlah node dalam Tree",
+      "Jumlah level dari root ke leaf terdalam",
+      "Jumlah child dari setiap node",
+      "Jumlah elemen di level terakhir"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "question": "Manakah yang merupakan aplikasi dari Tree?",
+    "options": [
+      "Database indexing",
+      "Penjadwalan proses",
+      "Struktur menu pada aplikasi",
+      "Semua jawaban benar"
+    ],
+    "correctAnswer": 3
+  },
+  {
+    "question": "Jika sebuah Tree memiliki n node, berapa banyak edge yang dimiliki?",
+    "options": [
+      "n",
+      "n + 1",
+      "n - 1",
+      "2n"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "question": "Apa itu Degenerate Tree?",
+    "options": [
+      "Tree yang menyerupai Linked List",
+      "Tree dengan semua node memiliki dua child",
+      "Tree dengan node tidak terhubung",
+      "Tree yang hanya memiliki root"
+    ],
+    "correctAnswer": 0
+  }
+]
         };
 
 
