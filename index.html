@@ -3357,6 +3357,14 @@ correctAnswer: 0
                 return `
                     <div class="mb-3">
                         <p><strong>${index + 1}. ${quiz.question}</strong></p>
+                         ${quiz.options.map((option, i) => `
+                            <div class="form-check ${i === correctAnswer ? 'correct' : ''}">
+                                <input class="form-check-input" type="radio" name="quiz${index}" id="quiz${index}option${i}" value="${i}">
+                                <label class="form-check-label" for="quiz${index}option${i}">
+                                    ${option}
+                                </label>
+                            </div>
+                        `).join("")}
                         <p>
                             Jawaban Anda: 
                             <span class="${userAnswer === correctAnswer ? 'correct' : 'incorrect'}">
